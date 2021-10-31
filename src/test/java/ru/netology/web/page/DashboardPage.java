@@ -31,7 +31,7 @@ public class DashboardPage extends AkitaPage {
     public DashboardPage() {
         heading.shouldBe(visible);
     }
-
+    @Name("баланс")
     public int getCardBalance(String id) {
         val text = cards.findBy(text(id)).shouldHave(text(id));
         return extractBalance(String.valueOf(text));

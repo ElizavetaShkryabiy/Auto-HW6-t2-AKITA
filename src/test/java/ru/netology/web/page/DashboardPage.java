@@ -28,9 +28,6 @@ public class DashboardPage extends AkitaPage {
     private SelenideElement deposit;
 
 
-    public DashboardPage() {
-        heading.shouldBe(visible);
-    }
     @Name("баланс")
     public int getCardBalance(String id) {
         val text = cards.findBy(text(id)).shouldHave(text(id));
@@ -46,7 +43,7 @@ public class DashboardPage extends AkitaPage {
 
     public TransferPage transferMoney(int index) {
         deposit = DataHelper.getCardButton(index);
-                deposit.click();
+        deposit.click();
 
         return Selenide.page(TransferPage.class);
     }

@@ -34,27 +34,24 @@ public class TemplateSteps {
         scenario.setCurrentPage(verificationPage.validVerify(verificationCode));
 
         scenario.getCurrentPage().appeared();
-        scenario.setCurrentPage(page(DashboardPage.class));
-        scenario.getCurrentPage().appeared();
-
 
     }
 
     @Когда("^он переводит \"([^\"]*)\" рублей с карты с номером \"([^\"]*)\" на свою \"([^\"]*)\" карту с главной страницы$")
     public void онПереводитРублейСКартыСНомеромНаСвоюКартуСГлавнойСтраницы(int amount, int index1, int index2) {
-        scenario.setCurrentPage(page(DashboardPage.class));
+
         var dashboardPage = (DashboardPage) scenario.getCurrentPage().appeared();
         var cardFrom = DataHelper.getCardInfo(index1);
         var cardTo = DataHelper.getCardInfo(index2);
         scenario.setCurrentPage(dashboardPage.transferMoney(cardTo.getDepositButton())
                 .successfulTransfer(amount, cardFrom.getNumber()));
-        scenario.setCurrentPage(dashboardPage);
+
         scenario.getCurrentPage().appeared();
     }
 
     @Тогда("^баланс его \"([^\"]*)\" карты из списка на главной странице должен стать \"([^\"]*)\" рублей$")
     public void балансЕгоКартыИзСпискаНаГлавнойСтраницеДолженСтатьРублей(int index, int balanceAmount) {
-        scenario.setCurrentPage(page(DashboardPage.class));
+
         var dashboardPage = (DashboardPage) scenario.getCurrentPage().appeared();
         var cardNumber = DataHelper.getCardInfo(index).getVisiblePart();
         var balance = dashboardPage.getCardBalance(String.valueOf(cardNumber));
